@@ -38,16 +38,9 @@ export class Branding {
   static LoginBackground = LoginBackground;
   static MenuLogo = MenuLogo;
   static LoginBoxBackground = LoginBoxBackground;
-  static AppTitle = 'Grafana';
-  static LoginTitle = 'Welcome to Grafana';
+  static AppTitle = 'Smart Campus';
+  static LoginTitle = 'Smart Campus';
   static GetLoginSubTitle = () => {
-    const slogans = [
-      "Don't get in the way of the data",
-      'Your single pane of glass',
-      'Built better together',
-      'Democratising data',
-    ];
-    const count = slogans.length;
-    return slogans[Math.floor(Math.random() * count)];
+    return 'Instituto Politecnico Nacional';
   };
 }
