@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	telegramAPIURL = "https://api.telegram.org/bot%s/sendMessage"
+	TelegramAPIURL = "https://api.telegram.org/bot%s/sendMessage"
 )
 
 // TelegramNotifier is responsible for sending
@@ -63,6 +63,7 @@ func NewTelegramNotifier(model *models.AlertNotification, t *template.Template) 
 
 // Notify send an alert notification to Telegram.
 func (tn *TelegramNotifier) Notify(ctx context.Context, as ...*types.Alert) (bool, error) {
+	as = RemoveSystemLabels(as)
 	msg, err := tn.buildTelegramMessage(ctx, as)
 	if err != nil {
 		return false, err
@@ -90,7 +91,7 @@ func (tn *TelegramNotifier) Notify(ctx context.Context, as ...*types.Alert) (boo
 
 	tn.log.Info("sending telegram notification", "chat_id", tn.ChatID)
 	cmd := &models.SendWebhookSync{
-		Url:        fmt.Sprintf(telegramAPIURL, tn.BotToken),
+		Url:        fmt.Sprintf(TelegramAPIURL, tn.BotToken),
 		Body:       body.String(),
 		HttpMethod: "POST",
 		HttpHeader: map[string]string{
